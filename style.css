@@ -1,0 +1,199 @@
+body {
+    font-family: sans-serif;
+    font-size: 18px;
+    background-color: #FFFFFF;
+    color: #000000;
+    padding: 0px;
+    margin: 16px;
+}
+#toast {
+    position: fixed;
+    top: 16px;
+    right: 0px;
+    border-radius: 16px;
+    background-color: #000000;
+    color: #FFFFFF;
+    padding: 16px;
+}
+#heading {
+    font-size: 36px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 8px;
+    width: fit-content;
+    box-shadow: 8px 8px 16px 0px #808080;
+    text-shadow: 2px 2px 4px #C0C0C0;
+    background: linear-gradient(to bottom right, #FFFFFF, #F0F0F0);
+    color: #404040;
+    margin: 16px auto 16px auto;
+    padding: 16px;
+}
+#loggedout, #loggedin {
+    text-align: center;
+}
+.login, .logout {
+    border-width: 1px;
+    border-radius: 4px;
+    background: linear-gradient(to bottom right, #FFFFFF, #C0C0C0);
+    font-size: 18px;
+    padding: 4px;
+    margin: 0px;
+    cursor: pointer;
+}
+#walletlist {
+    border-radius: 8px;
+    text-align: center;
+    position: fixed;
+    white-space: nowrap;
+    background-color: #FFFFFF;
+    box-shadow: 8px 8px 16px 0px #808080;
+    padding: 16px;
+    text-shadow: 1px 1px 2px #C0C0C0;
+    top: 100px;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+#message {
+    border-radius: 8px;
+    text-align: center;
+    position: fixed;
+    white-space: nowrap;
+    background-color: #FFFFFF;
+    box-shadow: 8px 8px 16px 0px #808080;
+    padding: 16px;
+    text-shadow: 1px 1px 2px #C0C0C0;
+    top: 190px;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+.complete {
+    font-size: 24px;
+    font-weight: bold;
+    border-radius: 8px;
+    background-color: #008000;
+    color: #FFFFFF;
+    text-shadow: 1px 1px 2px #000000;
+    padding: 4px 64px 4px 64px;
+    margin: 0px 16px 8px 16px;
+}
+a {
+  color: #000000;
+}
+#choose {
+    font-size: 32px;
+    font-weight: bold;
+}
+.close {
+    position: fixed;
+    font-size: 24px;
+    font-stretch: expanded;
+    font-weight: bold;
+    color: #C0C0C0;
+    background-color: transparent;
+    border-width: 0px;
+    border: none;
+    top: 0px;
+    right: 4px;
+    transform: scale(1.2,1);
+    cursor: pointer;
+}
+#wcw {
+    font-size: 24px;
+    border-radius: 8px;
+    background-color: #FA901E;
+    color: #FFFFFF;
+    text-shadow: 1px 1px 2px #000000;
+    padding: 8px;
+    margin: 8px;
+    width: 350px;
+    cursor: pointer;
+}
+#anchor {
+    font-size: 24px;
+    border-radius: 8px;
+    background-color: #3650A2;
+    color: #FFFFFF;
+    text-shadow: 1px 1px 2px #000000;
+    padding: 8px;
+    margin: 8px;
+    width: 350px;
+    cursor: pointer;
+}
+.menuentry {
+    background-color: white;
+    text-align: center;
+    width: fit-content;
+    box-shadow: 4px 4px 8px 0px #808080;
+    text-shadow: 1px 1px 2px #C0C0C0;
+    margin: 16px auto 16px auto;
+    padding: 8px;
+}
+#timeselect {
+    text-align: center;
+    text-shadow: 1px 1px 2px #C0C0C0;
+    margin: 16px auto 16px auto;
+    padding: 8px;
+}
+#timeinput {
+    text-align: right;
+    font-size: 24px;
+    font-weight: bold;
+    width: 40px;
+}
+.stakeamount {
+    font-size: 24px;
+    font-weight: bold;
+}
+.timeperiod {
+    padding: 8px;
+}
+.buy {
+    border-width: 1px;
+    border-radius: 4px;
+    background: linear-gradient(to bottom right, #FFFFFF, #C0C0C0);
+    font-size: 18px;
+    padding: 4px;
+    cursor: pointer;
+}
+#custominput {
+    text-align: right;
+    font-size: 24px;
+    font-weight: bold;
+    width: 60px;
+}
+#free {
+    font-weight: bold;
+    text-shadow: 1px 1px 2px #C0C0C0;
+    text-align: center;
+    font-size: 18px;
+}
+#pools table {
+    border-top: 1px solid black;
+    text-align: center;
+    border-spacing: 8px;
+    margin: 12px auto 0px auto;
+}
+#pools td {
+    padding: 4px 8px 4px 8px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+#pools a {
+    font-size: 18px;
+    text-shadow: 1px 1px 2px #C0C0C0;
+}
+#links {
+    padding: 16px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+}
+#links a {
+    color: #000000;
+    text-shadow: 1px 1px 2px #C0C0C0;
+}
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    margin: 0; 
+}
