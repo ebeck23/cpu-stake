@@ -1,8 +1,8 @@
 const dapp = "WaxCPULoan";
-const endpoint = "https://testnet.waxsweden.org";
+const endpoint = "testnet.wax.pink.gg";
 const chainId = "f16b1833c747c43682f4386fca9cbb327929334a762755ebec17f6f23c9b8a12";
 const tokenContract = { WAX: "eosio.token" };
-const menuPrices = [1, 2, 5];
+const menuPrices = [1];
 const pools = [
   { name: "Main pool", url: "/", contract: "cpuloanstak1" }
   //{ name: "Ash pool", url: "/ashpool/", contract: "ashtocpuloan" },
@@ -11,36 +11,41 @@ const pools = [
 main();
 async function main() {
   loggedIn = false;
-  freeSpace = await GetFreeSpace();
   configPromise = GetConfig();
   config = await configPromise;
+  console.log(config);
   if (config.Valid) {
     PopulateMenu();
+  freeSpace = await GetFreeSpace();
+
     PopulatePoolList();
     autoLogin();
     document.getElementById("timeinput").oninput = TimeInputChanged;
-  }
+  }/**/
 }
 function PopulateMenu() {
   var menu = "";
-  var symbol = GetSymbol(config.MinimumTransfer);
+  var symbol = "WAX";
   for (var index = 0; index < menuPrices.length; ++index) {
     var stakeAmount = 
        '<input type="number" id="custominput" name="custominput" pattern="d*">';
     var timeMultiplier = GetTimeMultiplier();
-    var buyAmount ='<span id="customamount"></span>';
-    var disabled =  " disabled";
-    var days = (timeMultiplier * config.SecondsPerStake) / 3600 / 24;
+    console.log(timeMultiplier);
+    console.log(config.StakeSeconds);
+    var buyAmount ='<span id="customamount"></span>'; 
+    var disabled =  "";
+    var days = (timeMultiplier * config.StakeSeconds) / 3600 / 24;
+    console.log(buyAmount);
     menu += '<div class="menuentry"><table><tr>';
     menu += '<td class="stakeamount">' + stakeAmount + " WAX</td>";
     menu += '<td class="timeperiod">staked for ' + days + " day" + (days > 1 ? "s" : "") + "</a>";
     menu +=
       '<td><button id="buy' +
       index +
-      '" class="buy" onclick=' +
-      disabled +
+      '" class="buy" onclick=' +"buy(" +
+      menuPrices[index] * timeMultiplier + ")"+disabled +
       ">" +
-      ("Buy now<br>" + buyAmount + " " + symbol) +
+      "Buy now<br>" + buyAmount + " " + symbol+
       "</button></td>";
     menu += "</tr></table></div>";
   }
@@ -60,8 +65,7 @@ function CustomInputChanged() {
   element.value = parseInt(element.value);
   var valid = element.value > 0;
   var timeMultiplier = GetTimeMultiplier();
-  document.getElementById("customamount").innerHTML = valid ? (timeMultiplier * element.value) / config.Multiplier : "";
-  document.getElementById("buy" + menuPrices.length).disabled = !valid;
+  document.getElementById("customamount").innerHTML =  (timeMultiplier * element.value) / config.Multiplier ;
 }
 function TimeInputChanged() {
   var textValue = document.getElementById("timeinput").value;
@@ -103,13 +107,13 @@ function HideMessage(message) {
 async function buy(amount) {
   if (loggedIn) {
     HideMessage();
-    var amount = amount < 0 ? parseFloat(document.getElementById("customamount").innerHTML) : amount;
-    var amount = amount.toFixed(CalcDecimals(config.MinimumTransfer)) + " " + GetSymbol(config.MinimumTransfer);
+    var amount = parseFloat(document.getElementById("customamount").innerHTML);
+     amount = amount.toFixed(CalcDecimals(config.MinimumTransfer)) + " " + "WAX";
     var timeMultiplier = GetTimeMultiplier();
     try {
       const result = await wallet_transact([
         {
-          account: tokenContract[GetSymbol(config.MinimumTransfer)],
+          account: "eosio.token",
           name: "transfer",
           authorization: [{ actor: wallet_userAccount, permission: "active" }],
           data: { from: wallet_userAccount, to: contract, quantity: amount, memo: timeMultiplier },
@@ -128,13 +132,7 @@ async function buy(amount) {
   }
 }
 
-function GetSymbol(quantity) {
-  var spacePos = quantity.indexOf(" ");
-  if (spacePos != -1) {
-    return quantity.substr(spacePos + 1);
-  }
-  return "";
-}
+
 function CalcDecimals(quantity) {
   var dotPos = quantity.indexOf(".");
   var spacePos = quantity.indexOf(" ");
@@ -145,7 +143,7 @@ function CalcDecimals(quantity) {
 }
 
 async function GetFreeSpace() {
-  /*for (var index = 0; index < pools.length;index ++) {
+  for (var index = 0; index < pools.length;index ++) {
     var path = "/v1/chain/get_table_rows";
     var data = JSON.stringify({
       json: true,
@@ -161,12 +159,11 @@ async function GetFreeSpace() {
     if (body.rows && Array.isArray(body.rows) && body.rows.length == 1) {
       pools[index].freeSpace = Math.floor(parseFloat(body.rows[0].balance));
       if (pools[index].contract == contract) {
-        document.getElementById("freevalue").innerHTML = pools[index].name + ": " + pools[index].freeSpace + " WAX";
       }
     } else {
       ShowToast("Unexpected response retrieving balance");
     }
-  }*/
+  }
 }
 async function ShowToast(message) {
   var element = document.getElementById("toast");
@@ -233,28 +230,30 @@ async function wallet_isAutoLoginAvailable() {
 }
 
 async function GetConfig() {
-    //var path = "/v2/chain/get_table_rows";
-    //var data = JSON.stringify({ json: true, code: contract, scope: contract, table: "config", limit: 1 });
-    const response = await wax.rpc.get_table_rows({
-        json: true,
+    var path = "/v1/chain/get_table_rows";
+    var data = JSON.stringify({ json: true, code: contract, scope: contract, table: "config", limit: 1 });
+    /*const response = await wax.rpc.get_table_rows({
+       json: true,
         code: contract,
         scope: contract,
         table: 'config',
         limit: 1
-      });
-     //await fetch("https://" + endpoint + path, { headers: { "Content-Type": "text/plain" }, body: data, method: "POST" });
-    const body = await response.json();
-    if (body.rows && Array.isArray(body.rows) && body.rows.length == 1) {
+      });*/
+      const response =await fetch("https://" + endpoint + path, { headers: { "Content-Type": "text/plain" }, body: data, method: "POST" });
+   
+      const body = await response.json();
+      console.log(body);
+  if (body.rows && Array.isArray(body.rows) && body.rows.length == 1) {
       return {
         Valid: true,
-        SecondsPerStake: parseInt(body.rows[0].SecondsPerStake),
-              MinimumTransfer: body.rows[0].MinimumTransfer,
-              Multiplier: parseInt(body.rows[0].Multiplier)
+        StakeSeconds: parseInt(body.rows[0].unstakeSeconds),
+              MinimumTransfer: body.rows[0].min_amount,
+              Multiplier: parseInt(body.rows[0].cpu_multiplier)
       };
     } else {
       ShowToast("Unexpected response retrieving config");
       return { Valid: false };
-    }
+    } /* */
   }
 
 async function wallet_selectWallet(walletType) {
