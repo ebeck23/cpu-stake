@@ -58,7 +58,7 @@ function PopulateMenu() {
 function PopulatePoolList() {
   var html = "<table><tr>";
   for (var index = 0; index < pools.length; ++index) {
-    html += '<td><a href="' + pools[index].url + '">' + pools[index].name + "</a><br>" + pools[index].freeSpace + " WAX</td>";
+    html += '<td><a href="' + pools[index].url +"cpu-stake/"+ '">' + pools[index].name + "</a><br>" + pools[index].freeSpace + " WAX</td>";
   }
   html += "</tr></table>";
   document.getElementById("pools").innerHTML = html;
