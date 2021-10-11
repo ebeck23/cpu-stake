@@ -5,8 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,user-scalable=no">
     <title>WAX CPU BANK</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="waxjs.js"></script>
+    <link rel="stylesheet" href="../style.css">
+    <script src="../waxjs.js"></script>
     <script src="https://unpkg.com/anchor-link@3"></script>
     <script src="https://unpkg.com/anchor-link-browser-transport@3"></script>
 
@@ -22,15 +22,16 @@
             <div><button class="close" onclick="HideMessage()">x</button></div>
             <div id="messagecontent"></div>
         </div>
-        <div id="heading">WAX BANK</div>
+        <div id="heading">WAX CPU BANK</div>
+
         <div id="loggedout"><button class="login" onclick="WalletListVisible(!0)">Login</button></div>
         <div id="loggedin" style="display:none"><span id="accountname"></span> <button class="logout"
                 onclick="logout()">Logout</button></div>
-        <div id="timeselect">Loan&nbsp;duration: <input type="number" id="timeinput" name="timeinput" pattern="\d*"
+        <div id="timeselect">Staked&nbsp;for: <input type="number" id="timeinput" name="timeinput" pattern="\d*"
                 value="1"> <span id="timeunit">day</span></div>
         <div id="menu"></div>
         <div id="pools"></div>
         <script>
-            const contract = "cpuloaner123"
+            const contract = "cpuloanstak1"
         </script>
-        <script src="main.js"></script>
+              <script src="../main.js"></script>

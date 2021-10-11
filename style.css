@@ -1,52 +1,67 @@
 body {
-    font-family: verdana;
+    font-family:Arial, Helvetica, sans-serif;
+    font-style:normal;
     font-size: 30px;
-    background-color: #9dff00;
-    color: #750fc9;
+    color:#ffffff;
+    background-repeat: no-repeat;
+      background-image: url(" https://media.istockphoto.com/vectors/online-internet-banking-3d-isometric-banner-a-bank-building-with-of-vector-id1202705835?k=20&m=1202705835&s=612x612&w=0&h=J1P8HFSUphpK_iqSND3OJF9kYOjV4ARHa82Jy341TYU=");
+    background-color:#5f3e3e;
+    background-position: center;
+    background-blend-mode:luminosity;
+    background-attachment: fixed;
+    background-size: 100% 100%;
     padding: 0px;
     margin: 16px;
 }
-#toast {
+#toast {    
     position: fixed;
-    top: 16px;
+    top: 60px;
     right: 0px;
     border-radius: 16px;
-    background-color: #79aab1;
-    color: #810505;
+    background-color: #000000;
+    color: #fff9f9;
     padding: 16px;
 }
 #heading {
-    font-size: 36px;
+    font-size: 30px;
     font-weight: bold;
     text-align: center;
-    border-radius: 8px;
+    font-family: 'Times New Roman', Times, serif;
+    border-radius: 60px;
     width: fit-content;
-    box-shadow: 8px 8px 16px 0px #808080;
+    box-shadow: 8px 8px 16px 0px #000000;
     text-shadow: 2px 2px 4px #C0C0C0;
-    background: linear-gradient(to bottom right, #FFFFFF, #F0F0F0);
-    color: #404040;
-    margin: 16px auto 16px auto;
-    padding: 16px;
+    background: linear-gradient(to bottom right, #0cb6c2, #F0F0F0);
+    color: #01082c;
+    margin: 3px auto 3px auto;
+    padding: 30px;
 }
 #loggedout, #loggedin {
-    text-align: center;
+    position: fixed;
+    top: 15px;
+    right: 150px;
+    
 }
 .login, .logout {
-    border-width: 1px;
-    border-radius: 4px;
+    border-width: 10px;
+    border-radius: 5;
+    position: fixed;
+    top: 5px;
+    right: 0px;
+    
     background: linear-gradient(to bottom right, #FFFFFF, #C0C0C0);
     font-size: 18px;
-    padding: 4px;
-    margin: 0px;
+    padding: 5px;
+    margin: 10px;
     cursor: pointer;
 }
 #walletlist {
     border-radius: 8px;
-    text-align: center;
+    text-align: bottom;
     position: fixed;
     white-space: nowrap;
     background-color: #FFFFFF;
-    box-shadow: 8px 8px 16px 0px #808080;
+    box-shadow: 8px 8px 16px 0px #000000;
     padding: 16px;
     text-shadow: 1px 1px 2px #C0C0C0;
     top: 100px;
@@ -58,8 +73,9 @@ body {
     text-align: center;
     position: fixed;
     white-space: nowrap;
+    
     background-color: #FFFFFF;
-    box-shadow: 8px 8px 16px 0px #808080;
+    box-shadow: 8px 8px 16px 0px #0c0c0c;
     padding: 16px;
     text-shadow: 1px 1px 2px #C0C0C0;
     top: 190px;
@@ -70,7 +86,7 @@ body {
     font-size: 24px;
     font-weight: bold;
     border-radius: 8px;
-    background-color: #008000;
+    background-color: #441a1a;
     color: #FFFFFF;
     text-shadow: 1px 1px 2px #000000;
     padding: 4px 64px 4px 64px;
@@ -111,7 +127,7 @@ a {
 #anchor {
     font-size: 24px;
     border-radius: 8px;
-    background-color: #3650A2;
+    background-color: #00388b;
     color: #FFFFFF;
     text-shadow: 1px 1px 2px #000000;
     padding: 8px;
@@ -120,19 +136,24 @@ a {
     cursor: pointer;
 }
 .menuentry {
-    background-color: white;
-    text-align: center;
+    background: linear-gradient(to bottom right, #0040ca, #3fa3f5);
+
+    text-align: bottom;
+
+    border-radius: 25px;
+
     width: fit-content;
-    box-shadow: 4px 4px 8px 0px #0b6285;
-    text-shadow: 1px 1px 2px #C0C0C0;
+    box-shadow: 4px 4px 8px 0px #4188f3;
+    text-shadow: 1px 1px 2px #000000;
     margin: 16px auto 16px auto;
     padding: 8px;
 }
 #timeselect {
     text-align: center;
-    text-shadow: 1px 1px 2px #C0C0C0;
+
+    text-shadow: 1px 1px 2px #f7eeee;
     margin: 16px auto 16px auto;
-    padding: 8px;
+    padding: 80px;
 }
 #timeinput {
     text-align: right;
@@ -150,7 +171,7 @@ a {
 .buy {
     border-width: 1px;
     border-radius: 4px;
-    background: linear-gradient(to bottom right, #FFFFFF, #C0C0C0);
+    background: linear-gradient(to bottom right, #f4f7f1, #9c8181);
     font-size: 18px;
     padding: 4px;
     cursor: pointer;
@@ -168,28 +189,33 @@ a {
     font-size: 18px;
 }
 #pools table {
-    border-top: 1px solid black;
+    border-top: 1px solid rgb(8, 0, 82);
     text-align: center;
-    border-spacing: 8px;
-    margin: 12px auto 0px auto;
+    color: #ffffff;
+
+    border-spacing: 20px;
+    margin: 20px auto 0px auto;
 }
 #pools td {
     padding: 4px 8px 4px 8px;
-    font-size: 14px;
-    line-height: 1.5;
+    font-size: 25px;
+    line-height: 5;
 }
 #pools a {
-    font-size: 18px;
+    font-size: 25px;
     text-shadow: 1px 1px 2px #C0C0C0;
 }
 #links {
     padding: 16px;
     text-align: center;
-    font-size: 14px;
+    font-size: 25px;
     font-weight: bold;
+    color: #bb0000;
+
+    
 }
 #links a {
-    color: #000000;
+    color: #bb0000;
     text-shadow: 1px 1px 2px #C0C0C0;
 }
 input[type=number]::-webkit-inner-spin-button, 

@@ -5,9 +5,9 @@ const tokenContract = { WAX: "eosio.token" };
 const menuPrices = [1];
 const pools = [
   { name: "Main pool", url: "/", contract: "cpuloanstak1" },
-  { name: "Second pool", url: "SecondPool", contract: "cpuloaner123" },
-  { name: "Third pool", url: "ThirdPool", contract: "cpuloanstak1" },
-  { name: "Fourth pool", url: "FourthPool ", contract: "cpuloanstak1" }
+  { name: "Second pool", url: "SecondPool/", contract: "cpuloaner123" },
+  { name: "Third pool", url: "ThirdPool/", contract: "cpuloanstak1" },
+  { name: "Fourth pool", url: "FourthPool/", contract: "cpuloanstak1" }
 
   //{ name: "x2 pool", url: "/x2pool/", contract: "x2waxcpuloan" },
 ];
@@ -58,7 +58,7 @@ function PopulateMenu() {
 function PopulatePoolList() {
   var html = "<table><tr>";
   for (var index = 0; index < pools.length; ++index) {
-    html += '<td><a href="' + pools[index].url +"cpu-stake/"+ '">' + pools[index].name + "</a><br>" + pools[index].freeSpace + " WAX</td>";
+    html += '<td><a href="' + pools[index].url + '">' + pools[index].name + "</a><br>" + pools[index].freeSpace + " WAX</td>";
   }
   html += "</tr></table>";
   document.getElementById("pools").innerHTML = html;
