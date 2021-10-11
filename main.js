@@ -4,10 +4,10 @@ const chainId = "f16b1833c747c43682f4386fca9cbb327929334a762755ebec17f6f23c9b8a1
 const tokenContract = { WAX: "eosio.token" };
 const menuPrices = [1];
 const pools = [
-  { name: "Main pool", url: "/", contract: "cpuloanstak1" },
-  { name: "Second pool", url: "SecondPool/", contract: "cpuloaner123" },
-  { name: "Third pool", url: "ThirdPool/", contract: "cpuloanstak1" },
-  { name: "Fourth pool", url: "FourthPool/", contract: "cpuloanstak1" }
+  { name: "Main pool", url: "https://namanahuja15.github.io/cpu-stake/", contract: "cpuloanstak1" },
+  { name: "Second pool", url: "https://namanahuja15.github.io/cpu-stake/SecondPool/", contract: "cpuloaner123" },
+  { name: "Third pool", url: "https://namanahuja15.github.io/cpu-stake/ThirdPool/", contract: "cpuloanstak1" },
+  { name: "Fourth pool", url: "https://namanahuja15.github.io/cpu-stake/FourthPool/", contract: "cpuloanstak1" }
 
   //{ name: "x2 pool", url: "/x2pool/", contract: "x2waxcpuloan" },
 ];
