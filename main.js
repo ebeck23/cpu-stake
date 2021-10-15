@@ -74,6 +74,7 @@ function CustomInputChanged() {
   var valid = element.value > 0;
   var timeMultiplier = GetTimeMultiplier();
   document.getElementById("customamount").innerHTML =  (timeMultiplier * element.value) / config.Multiplier ;
+  document.getElementById("buy" + menuPrices.length).disabled = !valid
 }
 function TimeInputChanged() {
   var textValue = document.getElementById("timeinput").value;
@@ -115,7 +116,7 @@ function HideMessage(message) {
 async function buy(amount) {
   if (loggedIn) {
     HideMessage();
-    var amount = parseFloat(document.getElementById("customamount").innerHTML);
+    var amount = amount < 0 ? parseFloat(document.getElementById("customamount").innerHTML) : amount;
      amount = amount.toFixed(CalcDecimals(config.MinimumTransfer)) + " " + "WAX";
     var timeMultiplier = GetTimeMultiplier();
     try {

@@ -48,8 +48,8 @@ body {
 
 #loggedout, #loggedin {
     position: fixed;
-    top: 15px;
-    right: 150px;
+    top: 2%;
+    right: 8%;
     
 }
 .login, .logout {
@@ -58,8 +58,8 @@ body {
     right: 1%;
     
     background-color: inherit;
-    font-size: 18px;
-    padding: 5px;
+    font-size: 29px;
+    padding: 10px;
     margin: 10px;
     cursor: pointer;
 }
@@ -145,12 +145,7 @@ body {
     background: linear-gradient(to bottom right, #dce7ff, #edf7ff);
 
     text-align: center;
-
     font-size: 65px;
-
-
-    
-    box-shadow: 4px 4px 8px 0px #4188f3;
     text-shadow: 1px 1px 2px #ffffff;
 }
 
@@ -172,15 +167,19 @@ justify-content: center;
 }
 #timeinput {
     text-align: right;
-    font-size: 24px;
+    font-size: 30px;
     font-weight: bold;
     width: 40px;
     background-color:inherit;
+    border: none;
+    outline: none;
+    text-decoration: underline;
 }
 .stakeamount {
     font-size: 24px;
     font-weight: bold;
     text-align:center;
+    
 }
 .timeperiod {
     padding: 8px;
@@ -203,7 +202,10 @@ justify-content: center;
     text-align: right;
     font-size: 24px;
     font-weight: bold;
-    width: 60px;
+    width: 75px;
+    background-color:inherit;
+    outline: none;
+    text-decoration: underline;
 }
 #free {
     font-weight: bold;
