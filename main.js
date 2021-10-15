@@ -2,7 +2,7 @@ const dapp = "WaxCPULoan";
 const endpoint = "testnet.wax.pink.gg";
 const chainId = "f16b1833c747c43682f4386fca9cbb327929334a762755ebec17f6f23c9b8a12";
 const tokenContract = { WAX: "eosio.token" };
-const menuPrices = [1];
+const menuPrices = [1,2,5];
 const pools = [
   { name: "Main pool", url: "https://namanahuja15.github.io/cpu-stake/", contract: "cpuloanstak1" },
   { name: "Second pool", url: "https://namanahuja15.github.io/cpu-stake/SecondPool/", contract: "cpuloaner123" },
@@ -29,14 +29,17 @@ async function main() {
 function PopulateMenu() {
   var menu = "";
   var symbol = "WAX";
-  for (var index = 0; index < menuPrices.length; ++index) {
-    var stakeAmount = 
-       '<input type="number" id="custominput" name="custominput" pattern="d*">';
+  for (var index = 0; index <= menuPrices.length; ++index) {
+
     var timeMultiplier = GetTimeMultiplier();
     console.log(timeMultiplier);
     console.log(config.StakeSeconds);
-    var buyAmount ='<span id="customamount"></span>'; 
-    var disabled =  "";
+
+    var standard = index < menuPrices.length;
+    var buyAmount =standard?menuPrices[index] * timeMultiplier:'<span id="customamount"></span>'; 
+    var stakeAmount = 
+    standard ? (menuPrices[index]) * config.Multiplier : '<input type="number" id="custominput" name="custominput" pattern="d*">';
+    var disabled =  standard ? "" : " disabled";
     var days = (timeMultiplier * config.StakeSeconds) / 3600 / 24;
     console.log(buyAmount);
     menu += '<div class="menuentry"><table><tr>';
@@ -46,7 +49,7 @@ function PopulateMenu() {
       '<td><button id="buy' +
       index +
       '" class="buy" onclick=' +"buy(" +
-      menuPrices[index] * timeMultiplier + ")"+disabled +
+      (standard ? menuPrices[index] * timeMultiplier : -1) + ")"+disabled +
       ">" +
       "Buy now<br>" + buyAmount + " " + symbol+
       "</button></td>";

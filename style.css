@@ -2,20 +2,24 @@ body {
     font-family:Arial, Helvetica, sans-serif;
     font-style:normal;
     font-size: 30px;
-    color:#ffffff;
+    color:#000000;
     background-repeat: no-repeat;
-      background-image: url(" https://media.istockphoto.com/vectors/online-internet-banking-3d-isometric-banner-a-bank-building-with-of-vector-id1202705835?k=20&m=1202705835&s=612x612&w=0&h=J1P8HFSUphpK_iqSND3OJF9kYOjV4ARHa82Jy341TYU=");
-    background-color:#5f3e3e;
-    background-position: center;
-    background-blend-mode:luminosity;
+      background-image: url("https://icoexaminer.com/wp-content/uploads/2020/04/token-main.png");
+    background-color:#000000;
+    background-position: left;
+    background-blend-mode:normal;
     background-attachment: fixed;
-    background-size: 100% 100%;
-    padding: 0px;
+    background-position-x: 5%;
+    background-position-y: 28%;
+    background-size: 25% 45%;
+    padding: 5px;
     margin: 16px;
 }
+
+
 #toast {    
     position: fixed;
-    top: 60px;
+    top: 90px;
     right: 0px;
     border-radius: 16px;
     background-color: #000000;
@@ -23,19 +27,24 @@ body {
     padding: 16px;
 }
 #heading {
-    font-size: 30px;
+    font-size: 60px;
     font-weight: bold;
-    text-align: center;
+    text-align: left;
+    position: fixed;
+    left:0px;
     font-family: 'Times New Roman', Times, serif;
-    border-radius: 60px;
     width: fit-content;
-    box-shadow: 8px 8px 16px 0px #000000;
     text-shadow: 2px 2px 4px #C0C0C0;
-    background: linear-gradient(to bottom right, #0cb6c2, #F0F0F0);
-    color: #01082c;
+    background: 0d6bb8;
+    color: #000000;
     margin: 3px auto 3px auto;
     padding: 30px;
+    text-decoration:  underline;
+    text-decoration-style: solid;
+    text-decoration-color: rgb(235, 231, 3);
+    
 }
+
 #loggedout, #loggedin {
     position: fixed;
     top: 15px;
@@ -92,9 +101,7 @@ body {
     padding: 4px 64px 4px 64px;
     margin: 0px 16px 8px 16px;
 }
-a {
-  color: #000000;
-}
+
 #choose {
     font-size: 32px;
     font-weight: bold;
@@ -136,15 +143,16 @@ a {
     cursor: pointer;
 }
 .menuentry {
-    background: linear-gradient(to bottom right, #0040ca, #3fa3f5);
+    background: linear-gradient(to bottom right, #dce7ff, #edf7ff);
 
     text-align: bottom;
 
     border-radius: 25px;
+    font-size: 65px;
 
     width: fit-content;
     box-shadow: 4px 4px 8px 0px #4188f3;
-    text-shadow: 1px 1px 2px #000000;
+    text-shadow: 1px 1px 2px #ffffff;
     margin: 16px auto 16px auto;
     padding: 8px;
 }
@@ -171,9 +179,11 @@ a {
 .buy {
     border-width: 1px;
     border-radius: 4px;
-    background: linear-gradient(to bottom right, #f4f7f1, #9c8181);
+    width:fit-content;
+    background: linear-gradient(to bottom right, #00040f, #000d36);
     font-size: 18px;
     padding: 4px;
+    color:white;
     cursor: pointer;
 }
 #custominput {
@@ -189,20 +199,29 @@ a {
     font-size: 18px;
 }
 #pools table {
-    border-top: 1px solid rgb(8, 0, 82);
     text-align: center;
     color: #ffffff;
-
-    border-spacing: 20px;
+    border-spacing: 15px;
     margin: 20px auto 0px auto;
+    position: fixed;
+    color: #000000;
+    top:60%;
+    left: 30%
 }
 #pools td {
-    padding: 4px 8px 4px 8px;
+    padding: 8px 4px 4px 8px;
     font-size: 25px;
-    line-height: 5;
+    font-style:oblique;
+    line-height: 1.5;
+    color: #000000;
+    color: #000000;
+
 }
 #pools a {
-    font-size: 25px;
+    font-size: 45px;
+    font-style:oblique;
+    color: #000000;
+
     text-shadow: 1px 1px 2px #C0C0C0;
 }
 #links {
@@ -210,12 +229,12 @@ a {
     text-align: center;
     font-size: 25px;
     font-weight: bold;
-    color: #bb0000;
+    color: #000000;
 
     
 }
 #links a {
-    color: #bb0000;
+    color: #000000;
     text-shadow: 1px 1px 2px #C0C0C0;
 }
 input[type=number]::-webkit-inner-spin-button, 
