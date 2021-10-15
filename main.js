@@ -2,7 +2,7 @@ const dapp = "WaxCPULoan";
 const endpoint = "testnet.wax.pink.gg";
 const chainId = "f16b1833c747c43682f4386fca9cbb327929334a762755ebec17f6f23c9b8a12";
 const tokenContract = { WAX: "eosio.token" };
-const menuPrices = [1,2,5];
+const menuPrices = [1,2,4];
 const pools = [
   { name: "Main pool", url: "https://namanahuja15.github.io/cpu-stake/", contract: "cpuloanstak1" },
   { name: "Second pool", url: "https://namanahuja15.github.io/cpu-stake/SecondPool/", contract: "cpuloaner123" },
