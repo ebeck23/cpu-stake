@@ -4,10 +4,10 @@ const chainId = "f16b1833c747c43682f4386fca9cbb327929334a762755ebec17f6f23c9b8a1
 const tokenContract = { WAX: "eosio.token" };
 const menuPrices = [1,2,4];
 const pools = [
-  { name: "Main pool", url: "https://namanahuja15.github.io/cpu-stake/", contract: "cpuloanstak1" },
-  { name: "Second pool", url: "https://namanahuja15.github.io/cpu-stake/SecondPool/", contract: "cpuloaner123" },
-  { name: "Third pool", url: "https://namanahuja15.github.io/cpu-stake/ThirdPool/", contract: "cpuloanstak1" },
-  { name: "Fourth pool", url: "https://namanahuja15.github.io/cpu-stake/FourthPool/", contract: "cpuloanstak1" }
+  { name: "Pool 1", url: "https://namanahuja15.github.io/cpu-stake/", contract: "cpuloanstak1" },
+  { name: "Pool 2", url: "https://namanahuja15.github.io/cpu-stake/SecondPool/", contract: "cpuloaner123" },
+  { name: "Pool 3", url: "https://namanahuja15.github.io/cpu-stake/ThirdPool/", contract: "cpuloanstak1" },
+  { name: "Pool 4", url: "https://namanahuja15.github.io/cpu-stake/FourthPool/", contract: "cpuloanstak1" }
 
   //{ name: "x2 pool", url: "/x2pool/", contract: "x2waxcpuloan" },
 ];
@@ -42,18 +42,19 @@ function PopulateMenu() {
     var disabled =  standard ? "" : " disabled";
     var days = (timeMultiplier * config.StakeSeconds) / 3600 / 24;
     console.log(buyAmount);
-    menu += '<div class="menuentry"><table><tr>';
+    var string="item"+index;
+    menu += '<div  class="menuentry"><table><tr>';
     menu += '<td class="stakeamount">' + stakeAmount + " WAX</td>";
-    menu += '<td class="timeperiod">staked for ' + days + " day" + (days > 1 ? "s" : "") + "</a>";
+    menu += '<tr><td class="timeperiod">staked for ' + days + " day" + (days > 1 ? "s" : "") + "</tr></td></a>";
     menu +=
-      '<td><button id="buy' +
+      '<tr><td><button id="buy' +
       index +
       '" class="buy" onclick=' +"buy(" +
       (standard ? menuPrices[index] * timeMultiplier : -1) + ")"+disabled +
       ">" +
-      "Buy now<br>" + buyAmount + " " + symbol+
+      "BUY NOW " + buyAmount + " " + symbol+
       "</button></td>";
-    menu += "</tr></table></div>";
+    menu += "</tr></table></div>" ;
   }
   document.getElementById("menu").innerHTML = menu;
   document.getElementById("custominput").oninput = CustomInputChanged;
@@ -61,7 +62,8 @@ function PopulateMenu() {
 function PopulatePoolList() {
   var html = "<table><tr>";
   for (var index = 0; index < pools.length; ++index) {
-    html += '<td><a href="' + pools[index].url + '">' + pools[index].name + "</a><br>" + pools[index].freeSpace + " WAX</td>";
+    html += '<td><a href="' + pools[index].url + '">' + pools[index].name + "</a><br>" + pools[index].freeSpace+
+     " WAX</td>";
   }
   html += "</tr></table>";
   document.getElementById("pools").innerHTML = html;

@@ -1,5 +1,7 @@
+@import url(//fonts.googleapis.com/css?family=Poppins);
+
 body {
-    font-family:Arial, Helvetica, sans-serif;
+    font-family:Poppins;
     font-style:normal;
     font-size: 30px;
     color:#000000;
@@ -9,8 +11,8 @@ body {
     background-position: left;
     background-blend-mode:normal;
     background-attachment: fixed;
-    background-position-x: 5%;
-    background-position-y: 28%;
+    background-position-x: 3%;
+    background-position-y: 38%;
     background-size: 25% 45%;
     padding: 5px;
     margin: 16px;
@@ -31,14 +33,13 @@ body {
     font-weight: bold;
     text-align: left;
     position: fixed;
-    left:0px;
-    font-family: 'Times New Roman', Times, serif;
+    left:20px;
+    font-family: Poppins;
     width: fit-content;
-    text-shadow: 2px 2px 4px #C0C0C0;
+    text-shadow: 2px 2px 4px #000000;
     background: 0d6bb8;
     color: #000000;
     margin: 3px auto 3px auto;
-    padding: 30px;
     text-decoration:  underline;
     text-decoration-style: solid;
     text-decoration-color: rgb(235, 231, 3);
@@ -52,13 +53,11 @@ body {
     
 }
 .login, .logout {
-    border-width: 10px;
-    border-radius: 5;
     position: fixed;
-    top: 5px;
-    right: 0px;
+    top: 1%;
+    right: 1%;
     
-    background: linear-gradient(to bottom right, #FFFFFF, #C0C0C0);
+    background-color: inherit;
     font-size: 18px;
     padding: 5px;
     margin: 10px;
@@ -145,17 +144,25 @@ body {
 .menuentry {
     background: linear-gradient(to bottom right, #dce7ff, #edf7ff);
 
-    text-align: bottom;
+    text-align: center;
 
-    border-radius: 25px;
     font-size: 65px;
 
-    width: fit-content;
+
+    
     box-shadow: 4px 4px 8px 0px #4188f3;
     text-shadow: 1px 1px 2px #ffffff;
-    margin: 16px auto 16px auto;
-    padding: 8px;
 }
+
+#menu{
+display:grid;
+grid-template-rows: auto auto;
+grid-template-columns: auto auto;
+align-items: center;
+gap: 20px;
+justify-content: center;
+}
+
 #timeselect {
     text-align: center;
 
@@ -168,23 +175,29 @@ body {
     font-size: 24px;
     font-weight: bold;
     width: 40px;
+    background-color:inherit;
 }
 .stakeamount {
     font-size: 24px;
     font-weight: bold;
+    text-align:center;
 }
 .timeperiod {
     padding: 8px;
+    text-align:center;
+    font-size: 24px;
+
 }
 .buy {
-    border-width: 1px;
-    border-radius: 4px;
-    width:fit-content;
-    background: linear-gradient(to bottom right, #00040f, #000d36);
-    font-size: 18px;
-    padding: 4px;
+    width:300px;
+    background-color: #16252a;
+    height: 75px;
+    font-size: 20px;
+    text-align: center;
     color:white;
     cursor: pointer;
+    font-weight: bold;
+
 }
 #custominput {
     text-align: right;
@@ -201,28 +214,27 @@ body {
 #pools table {
     text-align: center;
     color: #ffffff;
-    border-spacing: 15px;
-    margin: 20px auto 0px auto;
-    position: fixed;
+    border-spacing: 25px;
+    margin: 20px auto 20px auto;
     color: #000000;
-    top:60%;
-    left: 30%
+    text-decoration-style:none;
+
 }
 #pools td {
     padding: 8px 4px 4px 8px;
     font-size: 25px;
-    font-style:oblique;
-    line-height: 1.5;
+    line-height: 2;
     color: #000000;
-    color: #000000;
+    text-decoration-style:none;
 
 }
 #pools a {
     font-size: 45px;
-    font-style:oblique;
     color: #000000;
-
+    text-align:top;
     text-shadow: 1px 1px 2px #C0C0C0;
+    text-decoration-style:none;
+
 }
 #links {
     padding: 16px;
@@ -237,8 +249,4 @@ body {
     color: #000000;
     text-shadow: 1px 1px 2px #C0C0C0;
 }
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
-    -webkit-appearance: none; 
-    margin: 0; 
-}
+
