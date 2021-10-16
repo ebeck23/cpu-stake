@@ -62,7 +62,7 @@ function PopulateMenu() {
 function PopulatePoolList() {
   var html = "<table><tr>";
   for (var index = 0; index < pools.length; ++index) {
-    html += '<td><a href="' + pools[index].url + '">' + pools[index].name + "</a><br>" + pools[index].freeSpace+
+    html += '<td><a href="' + pools[index].url+ ' "style="text-decoration:none;" >' + pools[index].name + "</a><br>" + pools[index].freeSpace+
      " WAX</td>";
   }
   html += "</tr></table>";
