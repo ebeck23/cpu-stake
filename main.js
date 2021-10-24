@@ -13,17 +13,17 @@ const pools = [
   {
     name: "Pool 2",
     url: "https://namanahuja15.github.io/cpu-stake/SecondPool/",
-    contract: "cpuloaner123",
+    contract: "cpuloantests",
   },
   {
     name: "Pool 3",
     url: "https://namanahuja15.github.io/cpu-stake/ThirdPool/",
-    contract: "cpuloanstak1",
+    contract: "cpuloantests",
   },
   {
     name: "Pool 4",
     url: "https://namanahuja15.github.io/cpu-stake/FourthPool/",
-    contract: "cpuloanstak1",
+    contract: "cpuloantests",
   },
 
   //{ name: "x2 pool", url: "/x2pool/", contract: "x2waxcpuloan" },

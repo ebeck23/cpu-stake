@@ -7,15 +7,17 @@
     width: max-content;
   }
   .title {
-    font-size: 25px !important;
+    font-size: 17px !important;
   }
   .login,
   .logout {
-    font-size: 20px !important;
+    font-size: 17px !important;
+    font-weight: bold;
     top: 3.6% !important;
   }
   #waxImage {
     width: 60% !important;
+    right: 50%;
   }
   .content {
     width: fit-content;
@@ -23,7 +25,7 @@
     flex-direction: column;
     margin-top: 10% !important;
   }
-  .leftContet {
+  .leftContent {
     text-align: center;
   }
   #timeselect {
@@ -36,6 +38,8 @@
   #poolinfo {
     display: flex !important;
     flex-direction: column !important;
+    font-size: 25px !important;
+
   }
   #freevalue {
     font-size: 26px !important;
@@ -45,7 +49,7 @@
     text-align: center;
   }
   #accountname{
-    font-size:11px !important;
+    font-size:15px !important;
   }
   #walletlist {
     width: 80% !important;
@@ -92,16 +96,20 @@ body {
   flex-direction: column;
   align-items: center;
 }
-
+.leftContent {
+  justify-content: flex-start;
+}
 .content {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: space-around;
+  justify-content:space-around;
   margin-top: 5%;
 }
-
+#accountname{
+  font-size:25px ;
+}
 #pool_d {
   font-size: 35px;
   color: #000000;
@@ -121,7 +129,7 @@ body {
 }
 
 .rightContent {
-  justify-content: flex-start;
+  justify-content: flex-end;
 }
 
 .navbar {
@@ -179,13 +187,15 @@ body {
 #loggedin {
   top: 2%;
   right: 8%;
+  width: fit-content;
 }
 .login,
 .logout {
   position: relative;
   top: 2.8%;
   right: 2%;
-  border: none;
+    font-weight: bold;
+    border: none;
   background-color: inherit;
   font-size: 35px;
   cursor: pointer;
@@ -219,6 +229,8 @@ body {
 }
 
 a:-webkit-any-link {
+  color: #000000;
+
   text-decoration-style: unset;
 }
 
