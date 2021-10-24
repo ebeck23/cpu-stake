@@ -1,13 +1,30 @@
 const dapp = "WaxCPULoan";
 const endpoint = "testnet.wax.pink.gg";
-const chainId = "f16b1833c747c43682f4386fca9cbb327929334a762755ebec17f6f23c9b8a12";
+const chainId =
+  "f16b1833c747c43682f4386fca9cbb327929334a762755ebec17f6f23c9b8a12";
 const tokenContract = { WAX: "eosio.token" };
-const menuPrices = [1,2,4];
+const menuPrices = [1, 2, 4];
 const pools = [
-  { name: "Pool 1", url: "https://namanahuja15.github.io/cpu-stake/", contract: "cpuloanstak1" },
-  { name: "Pool 2", url: "https://namanahuja15.github.io/cpu-stake/SecondPool/", contract: "cpuloaner123" },
-  { name: "Pool 3", url: "https://namanahuja15.github.io/cpu-stake/ThirdPool/", contract: "cpuloanstak1" },
-  { name: "Pool 4", url: "https://namanahuja15.github.io/cpu-stake/FourthPool/", contract: "cpuloanstak1" }
+  {
+    name: "Pool 1",
+    url: "https://namanahuja15.github.io/cpu-stake/",
+    contract: "cpuloanstak1",
+  },
+  {
+    name: "Pool 2",
+    url: "https://namanahuja15.github.io/cpu-stake/SecondPool/",
+    contract: "cpuloaner123",
+  },
+  {
+    name: "Pool 3",
+    url: "https://namanahuja15.github.io/cpu-stake/ThirdPool/",
+    contract: "cpuloanstak1",
+  },
+  {
+    name: "Pool 4",
+    url: "https://namanahuja15.github.io/cpu-stake/FourthPool/",
+    contract: "cpuloanstak1",
+  },
 
   //{ name: "x2 pool", url: "/x2pool/", contract: "x2waxcpuloan" },
 ];
@@ -19,62 +36,82 @@ async function main() {
   console.log(config);
   if (config.Valid) {
     PopulateMenu();
-  freeSpace = await GetFreeSpace();
+    freeSpace = await GetFreeSpace();
 
     PopulatePoolList();
     autoLogin();
     document.getElementById("timeinput").oninput = TimeInputChanged;
-  }/**/
+  } /**/
 }
 function PopulateMenu() {
   var menu = "";
   var symbol = "WAX";
   for (var index = 0; index <= menuPrices.length; ++index) {
-
     var timeMultiplier = GetTimeMultiplier();
     console.log(timeMultiplier);
     console.log(config.StakeSeconds);
 
     var standard = index < menuPrices.length;
-    var buyAmount =standard?menuPrices[index] * timeMultiplier:'<span id="customamount"></span>'; 
-    var stakeAmount = 
-    standard ? (menuPrices[index]) * config.Multiplier : '<input type="number" id="custominput" name="custominput" pattern="d*">';
-    var disabled =  standard ? "" : " disabled";
+    var buyAmount = standard
+      ? menuPrices[index] * timeMultiplier
+      : '<span id="customamount"></span>';
+    var stakeAmount = standard
+      ? menuPrices[index] * config.Multiplier
+      : '<input type="number" id="custominput" name="custominput" pattern="d*">';
+    var disabled = standard ? "" : " disabled";
     var days = (timeMultiplier * config.StakeSeconds) / 3600 / 24;
     console.log(buyAmount);
-    var string="item"+index;
+    var string = "item" + index;
     menu += '<div  class="menuentry"><table><tr>';
     menu += '<td class="stakeamount">' + stakeAmount + " WAX</td>";
-    menu += '<tr><td class="timeperiod">staked for ' + days + " day" + (days > 1 ? "s" : "") + "</tr></td></a>";
+    menu +=
+      '<tr><td class="timeperiod">staked for ' +
+      days +
+      " day" +
+      (days > 1 ? "s" : "") +
+      "</tr></td></a>";
     menu +=
       '<tr><td><button id="buy' +
       index +
-      '" class="buy" onclick=' +"buy(" +
-      (standard ? menuPrices[index] * timeMultiplier : -1) + ")"+disabled +
+      '" class="buy" onclick=' +
+      "buy(" +
+      (standard ? menuPrices[index] * timeMultiplier : -1) +
+      ")" +
+      disabled +
       ">" +
-      "BUY NOW " + buyAmount + " " + symbol+
+      "BUY NOW " +
+      buyAmount +
+      " " +
+      symbol +
       "</button></td>";
-    menu += "</tr></table></div>" ;
+    menu += "</tr></table></div>";
   }
   document.getElementById("menu").innerHTML = menu;
   document.getElementById("custominput").oninput = CustomInputChanged;
 }
 function PopulatePoolList() {
-  var html = "<table><tr>";
+  var html = '<div  id="poolinfo">';
   for (var index = 0; index < pools.length; ++index) {
-    html += '<td><a href="' + pools[index].url+ ' "style="text-decoration:none;" >' + pools[index].name + "</a><br>" + pools[index].freeSpace+
-     " WAX</td>";
+    html +=
+      '<div  class="pools_td"><a href="' +
+      pools[index].url +
+      ' "style="text-decoration:none;" >' +
+      pools[index].name +
+      "</a><br>" +
+      pools[index].freeSpace +
+      " WAX</div>";
   }
-  html += "</tr></table>";
-  document.getElementById("pools").innerHTML = html;
+  html += "</div>";
+  document.getElementById("pool_d").innerHTML = html;
 }
 function CustomInputChanged() {
   var element = document.getElementById("custominput");
   element.value = parseInt(element.value);
   var valid = element.value > 0;
   var timeMultiplier = GetTimeMultiplier();
-  document.getElementById("customamount").innerHTML =  (timeMultiplier * element.value) / config.Multiplier ;
-  document.getElementById("buy" + menuPrices.length).disabled = !valid
+  document.getElementById("customamount").innerHTML =
+    (timeMultiplier * element.value) / config.Multiplier;
+  document.getElementById("buy" + menuPrices.length).disabled = !valid;
 }
 function TimeInputChanged() {
   var textValue = document.getElementById("timeinput").value;
@@ -104,7 +141,9 @@ function GetTimeMultiplier() {
   }
 }
 function WalletListVisible(visible) {
-  document.getElementById("walletlist").style.visibility = visible ? "visible" : "hidden";
+  document.getElementById("walletlist").style.visibility = visible
+    ? "visible"
+    : "hidden";
 }
 function ShowMessage(message) {
   document.getElementById("messagecontent").innerHTML = message;
@@ -116,8 +155,11 @@ function HideMessage(message) {
 async function buy(amount) {
   if (loggedIn) {
     HideMessage();
-    var amount = amount < 0 ? parseFloat(document.getElementById("customamount").innerHTML) : amount;
-     amount = amount.toFixed(CalcDecimals(config.MinimumTransfer)) + " " + "WAX";
+    var amount =
+      amount < 0
+        ? parseFloat(document.getElementById("customamount").innerHTML)
+        : amount;
+    amount = amount.toFixed(CalcDecimals(config.MinimumTransfer)) + " " + "WAX";
     var timeMultiplier = GetTimeMultiplier();
     try {
       const result = await wallet_transact([
@@ -125,7 +167,12 @@ async function buy(amount) {
           account: "eosio.token",
           name: "transfer",
           authorization: [{ actor: wallet_userAccount, permission: "active" }],
-          data: { from: wallet_userAccount, to: contract, quantity: amount, memo: timeMultiplier },
+          data: {
+            from: wallet_userAccount,
+            to: contract,
+            quantity: amount,
+            memo: timeMultiplier,
+          },
         },
       ]);
       ShowMessage(
@@ -141,7 +188,6 @@ async function buy(amount) {
   }
 }
 
-
 function CalcDecimals(quantity) {
   var dotPos = quantity.indexOf(".");
   var spacePos = quantity.indexOf(" ");
@@ -152,7 +198,7 @@ function CalcDecimals(quantity) {
 }
 
 async function GetFreeSpace() {
-  for (var index = 0; index < pools.length;index ++) {
+  for (var index = 0; index < pools.length; index++) {
     var path = "/v1/chain/get_table_rows";
     var data = JSON.stringify({
       json: true,
@@ -163,11 +209,21 @@ async function GetFreeSpace() {
       upper_bound: "WAX",
       limit: 1,
     });
-    const response = await fetch("https://" + endpoint + path, { headers: { "Content-Type": "text/plain" }, body: data, method: "POST" });
+    const response = await fetch("https://" + endpoint + path, {
+      headers: { "Content-Type": "text/plain" },
+      body: data,
+      method: "POST",
+    });
     const body = await response.json();
     if (body.rows && Array.isArray(body.rows) && body.rows.length == 1) {
       pools[index].freeSpace = Math.floor(parseFloat(body.rows[0].balance));
       if (pools[index].contract == contract) {
+        document.getElementById("freevalue").innerHTML =
+          pools[index].name +
+          ": " +
+          pools[index].freeSpace +
+          " WAX" +
+          " available";
       }
     } else {
       ShowToast("Unexpected response retrieving balance");
@@ -190,8 +246,14 @@ async function ShowToast(message) {
       clearInterval(id);
       element.style.visibility = "hidden";
     }
-    p = toastU < slideFrac ? toastU / slideFrac / 2 : 1 - toastU < slideFrac ? (1 - toastU) / slideFrac / 2 : 0.5;
-    element.style.right = (width + right) * Math.sin(p * Math.PI) - width + "px";
+    p =
+      toastU < slideFrac
+        ? toastU / slideFrac / 2
+        : 1 - toastU < slideFrac
+        ? (1 - toastU) / slideFrac / 2
+        : 0.5;
+    element.style.right =
+      (width + right) * Math.sin(p * Math.PI) - width + "px";
   }
 }
 async function autoLogin() {
@@ -226,7 +288,11 @@ async function login() {
 }
 const wax = new waxjs.WaxJS("https://" + endpoint, null, null, false);
 const anchorTransport = new AnchorLinkBrowserTransport();
-const anchorLink = new AnchorLink({ transport: anchorTransport, verifyProofs: true, chains: [{ chainId: chainId, nodeUrl: "https://" + endpoint }] });
+const anchorLink = new AnchorLink({
+  transport: anchorTransport,
+  verifyProofs: true,
+  chains: [{ chainId: chainId, nodeUrl: "https://" + endpoint }],
+});
 async function wallet_isAutoLoginAvailable() {
   var sessionList = await anchorLink.listSessions(dapp);
   if (sessionList && sessionList.length > 0) {
@@ -239,31 +305,43 @@ async function wallet_isAutoLoginAvailable() {
 }
 
 async function GetConfig() {
-    var path = "/v1/chain/get_table_rows";
-    var data = JSON.stringify({ json: true, code: contract, scope: contract, table: "config", limit: 1 });
-    /*const response = await wax.rpc.get_table_rows({
+  var path = "/v1/chain/get_table_rows";
+  // var data = JSON.stringify({ json: true, code: "nftgamerstkt", scope:"nftgamerstkt", table: "unboxtickets",key_type: `i64`,index_position:'2',lower_bound:'4732050217762867280',upper_bound:"",limit: 100 });
+  /*const response = await wax.rpc.get_table_rows({
        json: true,
         code: contract,
         scope: contract,
         table: 'config',
         limit: 1
       });*/
-      const response =await fetch("https://" + endpoint + path, { headers: { "Content-Type": "text/plain" }, body: data, method: "POST" });
-   
-      const body = await response.json();
-      console.log(body);
+  var data = JSON.stringify({
+    json: true,
+    code: contract,
+    scope: contract,
+    table: "config",
+    limit: 1,
+  });
+
+  const response = await fetch("https://" + endpoint + path, {
+    headers: { "Content-Type": "text/plain" },
+    body: data,
+    method: "POST",
+  });
+
+  const body = await response.json();
+  console.log(body);
   if (body.rows && Array.isArray(body.rows) && body.rows.length == 1) {
-      return {
-        Valid: true,
-        StakeSeconds: parseInt(body.rows[0].unstakeSeconds),
-              MinimumTransfer: body.rows[0].min_amount,
-              Multiplier: parseInt(body.rows[0].cpu_multiplier)
-      };
-    } else {
-      ShowToast("Unexpected response retrieving config");
-      return { Valid: false };
-    } /* */
-  }
+    return {
+      Valid: true,
+      StakeSeconds: parseInt(body.rows[0].unstakeSeconds),
+      MinimumTransfer: body.rows[0].min_amount,
+      Multiplier: parseInt(body.rows[0].cpu_multiplier),
+    };
+  } else {
+    ShowToast("Unexpected response retrieving config");
+    return { Valid: false };
+  } /* */
+}
 
 async function wallet_selectWallet(walletType) {
   useAnchor = walletType == "anchor";
@@ -290,10 +368,16 @@ async function wallet_logout() {
 }
 async function wallet_transact(actions) {
   if (useAnchor) {
-    var result = await wallet_session.transact({ actions: actions }, { blocksBehind: 3, expireSeconds: 30 });
+    var result = await wallet_session.transact(
+      { actions: actions },
+      { blocksBehind: 3, expireSeconds: 30 }
+    );
     result = { transaction_id: result.processed.id };
   } else {
-    var result = await wallet_session.transact({ actions: actions }, { blocksBehind: 3, expireSeconds: 30 });
+    var result = await wallet_session.transact(
+      { actions: actions },
+      { blocksBehind: 3, expireSeconds: 30 }
+    );
   }
   return result;
 }
