@@ -1,5 +1,5 @@
 @import url(//fonts.googleapis.com/css?family=Poppins);
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 700px) {
   body {
     overflow: scroll !important;
   }
@@ -14,10 +14,11 @@
     font-size: 17px !important;
     font-weight: bold;
     top: 3.6% !important;
+    right :0% !important;
   }
   #waxImage {
     width: 60% !important;
-    right: 50%;
+    right: 10%;
   }
   .content {
     width: fit-content;
@@ -50,6 +51,8 @@
   }
   #accountname{
     font-size:15px !important;
+    right :0% !important;
+
   }
   #walletlist {
     width: 80% !important;
@@ -86,8 +89,11 @@ body {
 }
 
 #freevalue {
-  margin-top: 3%;
-  margin-left: 13%;
+  padding: 40px;
+font-size: 35px;
+box-sizing: border-box;
+text-align:center;
+top:50%;
 }
 
 .bottomBar {
@@ -111,7 +117,7 @@ body {
   font-size:25px ;
 }
 #pool_d {
-  font-size: 35px;
+  
   color: #000000;
   width: max-content;
   justify-content: center;
@@ -231,7 +237,7 @@ body {
 a:-webkit-any-link {
   color: #000000;
 
-  text-decoration-style: unset;
+  text-decoration-style: underline  ;
 }
 
 .complete {
@@ -352,36 +358,20 @@ a:-webkit-any-link {
   text-align: center;
   font-size: 18px;
 }
-#pools table {
-  text-align: center;
-  color: #ffffff;
-  border-spacing: 25px;
-  margin: 20px auto 20px auto;
-  color: #000000;
-  text-decoration-style: none;
-}
-#pools td {
+
+.pools_td {
   padding: 8px 4px 4px 8px;
-  font-size: 25px;
-  line-height: 2;
-  color: #000000;
-  text-decoration-style: unset;
-}
-#pools a {
-  font-size: 45px;
-  color: #000000;
-  text-align: top;
-  text-shadow: 1px 1px 2px #c0c0c0;
-  text-decoration-style: unset;
-}
-#links {
-  padding: 16px;
-  text-align: center;
-  font-size: 25px;
+  font-size: 35px;
   font-weight: bold;
   color: #000000;
+  text-decoration-style: underline;
+
 }
-#links a {
+.pools_a {
+  font-size: 25px;
   color: #000000;
-  text-shadow: 1px 1px 2px #c0c0c0;
+  text-align: center;
+  font-weight:lighter;
+  text-decoration-style: unset;
 }
+

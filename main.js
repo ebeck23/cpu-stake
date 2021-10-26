@@ -95,11 +95,12 @@ function PopulatePoolList() {
     html +=
       '<div  class="pools_td"><a href="' +
       pools[index].url +
-      ' "style="text-decoration:none;" >' +
+      ' "style="text-decoration:underline;" >' +
+      
       pools[index].name +
-      "</a><br>" +
+      "</a><br>" +'<div class="pools_a">'+
       pools[index].freeSpace +
-      " WAX</div>";
+      " WAX</div></div>";
   }
   html += "</div>";
   document.getElementById("pool_d").innerHTML = html;
