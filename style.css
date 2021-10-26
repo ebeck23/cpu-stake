@@ -14,7 +14,6 @@
     font-size: 17px !important;
     font-weight: bold;
     top: 3.6% !important;
-    right :0% !important;
   }
   #waxImage {
     width: 60% !important;
@@ -51,7 +50,6 @@
   }
   #accountname{
     font-size:15px !important;
-    right :0% !important;
 
   }
   #walletlist {
