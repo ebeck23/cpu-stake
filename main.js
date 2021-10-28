@@ -1,434 +1,114 @@
 const dapp = "WaxCPULoan";
-const endpoint = "testnet.wax.pink.gg";
+const endpoint = "wax.eosphere.io";
 const chainId =
-  "f16b1833c747c43682f4386fca9cbb327929334a762755ebec17f6f23c9b8a12";
+  "1064487b3cd1a897ce03ae5b6a865651747e2e152090f99c1d19d44e01aea5a4";
 const tokenContract = { WAX: "eosio.token" };
 const menuPrices = [1, 2, 4];
 const pools = [
   {
     name: "Pool 1",
     url: "https://namanahuja15.github.io/cpu-stake/",
-    contract: "cpuloanstak1",
+    contract: "cpuloanpools",
   },
   {
     name: "Pool 2",
     url: "https://namanahuja15.github.io/cpu-stake/SecondPool/",
-    contract: "cpuloantests",
+    contract: "cpuloanpool2",
   },
   {
     name: "Pool 3",
     url: "https://namanahuja15.github.io/cpu-stake/ThirdPool/",
-    contract: "cpuloantests",
+    contract: "cpuloanpool3",
   },
   {
     name: "Pool 4",
     url: "https://namanahuja15.github.io/cpu-stake/FourthPool/",
-    contract: "cpuloantests",
+    contract: "cpuloanpool4",
   },
 
   //{ name: "x2 pool", url: "/x2pool/", contract: "x2waxcpuloan" },
 ];
-
-var anchorAuth="owner";
+var wallet_auth="owner";
 
 main();
+
 async function main() {
   loggedIn = false;
   configPromise = GetConfig();
   config = await configPromise;
-  resultPromise=GetResults();
-  results=await resultPromise;
   console.log(config);
-  console.log(results);
+  if (config.Valid) {
+    PopulateMenu();
+    freeSpace = await GetFreeSpace();
 
-
-    //freeSpace = await GetFreeSpace();
-
-
-    PopulateResultList();
+    PopulatePoolList();
     autoLogin();
-
-    
- checkuser=GetAuthUsers();
- checkauth= await checkuser;
- var isauth=false;
- for(i=0;i<checkauth.length;i++)
- {
-   if(checkauth[i].account==wallet_userAccount)
-   isauth=true;
- }
-
- if(isauth)
-   ShowAdminControls();
- else
- {
-  PopulateMenu();
- }
- 
-    //document.getElementById("timeinput").oninput = TimeInputChanged;
-}
-
-async function announcespin(id) {
-  current=config[id];
-  console.log(current);
-
-  if (loggedIn) {
-    HideMessage();
-    try {
-      const result = await wallet_transact([
-        {
-          account: contract,
-          name: "announcespin",
-          authorization: [{ actor: wallet_userAccount, permission: anchorAuth }],
-          data: {
-            id: current.giveaway_id
-          },
-        },
-      ]);
-      ShowMessage(
-        '<div class="complete">Success</div><div class="link"><a href="https://wax.bloks.io/transaction/' +
-          result.transaction_id +
-          '?tab=traces">View transaction</a></div>'
-      );
-    } catch (e) {
-      ShowToast(e.message);
-    }
-  } else {
-    WalletListVisible(true);
-  }
-
-}
-
-async function join(id) {
-  current=config[id];
-  console.log(current);
-
-  if (loggedIn) {
-    HideMessage();
-    var amount = 1 + " " + "WAX";
-    try {
-      const result = await wallet_transact([
-        {
-          account: current.gv_contract,
-          name: "transfer",
-          authorization: [{ actor: wallet_userAccount, permission: anchorAuth }],
-          data: {
-            from: wallet_userAccount,
-            to: contract,
-            quantity: current.entrycost,
-            memo: current.giveaway_id,
-          },
-        },
-      ]);
-      ShowMessage(
-        '<div class="complete">Success</div><div class="link"><a href="https://wax.bloks.io/transaction/' +
-          result.transaction_id +
-          '?tab=traces">View transaction</a></div>'
-      );
-    } catch (e) {
-      ShowToast(e.message);
-    }
-  } else {
-    WalletListVisible(true);
-  }
-
-}
-
-async function GetAuthUsers() {
-  var path = "/v1/chain/get_table_rows";
-  // var data = JSON.stringify({ json: true, code: "nftgamerstkt", scope:"nftgamerstkt", table: "unboxtickets",key_type: `i64`,index_position:'2',lower_bound:'4732050217762867280',upper_bound:"",limit: 100 });
-  /*const response = await wax.rpc.get_table_rows({
-       json: true,
-        code: contract,
-        scope: contract,
-        table: 'config',
-        limit: 1
-      });*/
-  var data = JSON.stringify({
-    json: true,
-    code: "pixelgiveawy",
-    scope: "pixelgiveawy",
-    table: "authusers",
-    limit: 1000,
-  });
-
-  const response = await fetch("https://" + endpoint + path, {
-    headers: { "Content-Type": "text/plain" },
-    body: data,
-    method: "POST",
-  });
-
-  const body = await response.json();
-
-  let auth_users=[]; 
-  for(i=0;i<body.rows.length;i++)
-  {
-    auth_users.push({
-      account: body.rows[i].account,  
-      giveaways_perday: body.rows[i].giveaways_perday,  
-      day_start_time: body.rows[i].day_start_time,
-      giveaways_today:body.rows[i].giveaways_today
-    });
-  }
-
-  if (auth_users.length >= 1) { 
-    return auth_users;
-  } else {
-    ShowToast("Unexpected response retrieving results");
-    return { Valid: false };
-  } /* */
-
-
-}
-
-async function GetResults() {
-  var path = "/v1/chain/get_table_rows";
-  // var data = JSON.stringify({ json: true, code: "nftgamerstkt", scope:"nftgamerstkt", table: "unboxtickets",key_type: `i64`,index_position:'2',lower_bound:'4732050217762867280',upper_bound:"",limit: 100 });
-  /*const response = await wax.rpc.get_table_rows({
-       json: true,
-        code: contract,
-        scope: contract,
-        table: 'config',
-        limit: 1
-      });*/
-  var data = JSON.stringify({
-    json: true,
-    code: "pixelgiveawy",
-    scope: "pixelgiveawy",
-    table: "results",
-    limit: 1000,
-  });
-
-  const response = await fetch("https://" + endpoint + path, {
-    headers: { "Content-Type": "text/plain" },
-    body: data,
-    method: "POST",
-  });
-
-  const body = await response.json();
-
-  let results=[]; 
-  for(i=0;i<body.rows.length;i++)
-  {
-    results.push({
-      giveaway_id: parseInt(body.rows[i].giveaway_id ),
-      asset_id:body.rows[i].asset_id ,
-      winner:body.rows[i].winner,
-      roll_time:body.rows[i].roll_time,
-    });
-  }
-
-  if (body.rows && Array.isArray(body.rows) && body.rows.length >= 1) { 
-    return results;
-  } else {
-    ShowToast("Unexpected response retrieving results");
-    return { Valid: false };
-  } /* */
-
-
-}
-
-async function GetAssets(assetIDs) {
-  let results=[];
-
-  for(i=0;i<assetIDs.length;i++)
-  {
-
-    var path = "atomicassets/v1/assets/"+assetIDs[i];
-  // var data = JSON.stringify({ json: true, code: "nftgamerstkt", scope:"nftgamerstkt", table: "unboxtickets",key_type: `i64`,index_position:'2',lower_bound:'4732050217762867280',upper_bound:"",limit: 100 });
-  /*const response = await wax.rpc.get_table_rows({
-       json: true,
-        code: contract,
-        scope: contract,
-        table: 'config',
-        limit: 1
-      });*/
-
-
-  const response = await fetch("https://" + "test.wax.api.atomicassets.io/" + path, {
-    headers: { "Content-Type": "text/plain" },
-    method: "POST",
-  });
-
-  const body = await response.json();
-
-    results.push({
-      asset_id: parseInt(body.data.asset_id ),
-      img:body.data.data.img 
-    });
-}
-
-  if (results.length>0) { 
-    return results;
-  } else {
-    ShowToast("Unexpected response retrieving results");
-    return { Valid: false };
-  } /* */
-}
-
-async function GetConfig() {
-  var path = "/v1/chain/get_table_rows";
-  // var data = JSON.stringify({ json: true, code: "nftgamerstkt", scope:"nftgamerstkt", table: "unboxtickets",key_type: `i64`,index_position:'2',lower_bound:'4732050217762867280',upper_bound:"",limit: 100 });
-  /*const response = await wax.rpc.get_table_rows({
-       json: true,
-        code: contract,
-        scope: contract,
-        table: 'config',
-        limit: 1
-      });*/
-  var data = JSON.stringify({
-    json: true,
-    code: "pixelgiveawy",
-    scope: "pixelgiveawy",
-    table: "giveaways",
-    limit: 150,
-  });
-
-  const response = await fetch("https://" + endpoint + path, {
-    headers: { "Content-Type": "text/plain" },
-    body: data,
-    method: "POST",
-  });
-
-  const body = await response.json();
-  console.log(body);
-
-  let giveaways=[];
-  for(i=0;i<body.rows.length;i++)
-  {
-    giveaways.push({
-      giveaway_id: parseInt(body.rows[i].id),
-      entrycost: body.rows[i].entrycost,
-      account: body.rows[i].authorised_account,
-      assets: body.rows[i].asset_ids,
-      entrants: body.rows[i].accounts,
-      max_acc_size: body.rows[i].max_users,
-      last_roll: body.rows[i].last_roll,
-      timer: body.rows[i].loop_seconds,
-      templateID: body.rows[i].templateID,
-      q_needed: body.rows[i].quantiy_req,
-      gv_contract: body.rows[i].contract_account
-    });
-  }
-
-  if (body.rows && Array.isArray(body.rows) && body.rows.length >= 1) { 
-    return giveaways;
-  } else {
-    ShowToast("Unexpected response retrieving config");
-    return { Valid: false };
-  } /* */
-}
-
-
-function ShowAdminControls() {
-  var controls = "";
-  var symbol = "WAX";
-  var menu ="";
-  for (var index = 0; index < config.length; ++index) {
-    console.log(config[index].account);
-    if(config[index].account==wallet_userAccount  )
-    {
-    var disabled = config[index].assets.length>0? "" : " disabled";
-    var date=Date.parse(config[index].last_roll);
-    console.log(date);
-    var ts = new Date(date);
-    var disabled = config[index].assets.length>0? "" : " disabled";
-
-    menu += '<div  class="menuentry"><table><tr>';
-    menu += '<td class="stakeamount">' +"Giveaway ID "+ config[index].giveaway_id ;
-    menu += '<br>'  +"By "+ config[index].account+
-    '<br>' +"Entry cost  "+ config[index].entrycost +'<br>' + "Total entries " +config[index].entrants.length+" / "+config[index].max_acc_size
-    +'<br>' +"assets in pool "+ config[index].assets.length +'<br>' + "Time to roll "+ ts.toLocaleString()+  "</td>"+
-      '<tr><td><button id="spin' +
-        index +
-        '" class="buy" onclick=' +
-        "announcespin(" +
-        index +
-        ")" +disabled+">Announce Spin "+
-        "</button></td>";
-    menu += "</tr></table></div>";
-    }
-  }
-  document.getElementById("menu").innerHTML = menu;
+    document.getElementById("timeinput").oninput = TimeInputChanged;
+  } /**/
 }
 
 function PopulateMenu() {
   var menu = "";
   var symbol = "WAX";
-  for (var index = 0; index < config.length; ++index) {
-    console.log(config[index].account);
-    var disabled = config[index].assets.length>0? "" : " disabled";
-    var date=Date.parse(config[index].last_roll);
-    console.log(date);
-    var ts = new Date(date);
+  for (var index = 0; index <= menuPrices.length; ++index) {
+    var timeMultiplier = GetTimeMultiplier();
+    console.log(timeMultiplier);
+    console.log(config.StakeSeconds);
 
+    var standard = index < menuPrices.length;
+    var buyAmount = standard
+      ? menuPrices[index] * timeMultiplier
+      : '<span id="customamount"></span>';
+    var stakeAmount = standard
+      ? menuPrices[index] * config.Multiplier
+      : '<input type="number" id="custominput" name="custominput" pattern="d*">';
+    var disabled = standard ? "" : " disabled";
+    var days = (timeMultiplier * config.StakeSeconds) / 3600 / 24;
+    console.log(buyAmount);
+    var string = "item" + index;
     menu += '<div  class="menuentry"><table><tr>';
-    menu += '<td class="stakeamount">' +"Giveaway ID "+ config[index].giveaway_id ;
-    menu += '<br>'  +"By "+ config[index].account +
-    '<br>' +"Entry cost  "+ config[index].entrycost +'<br>' + "Total entries " +config[index].entrants.length+" / "+config[index].max_acc_size
-    +'<br>' +"assets in pool "+ config[index].assets.length +'<br>' + "Time to roll "+ ts.toLocaleString()+  "</td>"+
-    '<tr><td><button id="join' +
+    menu += '<td class="stakeamount">' + stakeAmount + " WAX</td>";
+    menu +=
+      '<tr><td class="timeperiod">staked for ' +
+      days +
+      " day" +
+      (days > 1 ? "s" : "") +
+      "</tr></td></a>";
+    menu +=
+      '<tr><td><button id="buy' +
       index +
       '" class="buy" onclick=' +
-      "join(" +
-      index +
-      ")" +">JOIN NOW "+
-      "</button></td>"+
-      '<tr><td><button id="see_assets' +
-        index +
-        '" class="buy" onclick=' +
-        "seeassets(" +
-        index +
-        ")" +">See assets in pool "+
-        "</button></td>";
+      "buy(" +
+      (standard ? menuPrices[index] * timeMultiplier : -1) +
+      ")" +
+      disabled +
+      ">" +
+      "BUY NOW " +
+      buyAmount +
+      " " +
+      symbol +
+      "</button></td>";
     menu += "</tr></table></div>";
   }
   document.getElementById("menu").innerHTML = menu;
+  document.getElementById("custominput").oninput = CustomInputChanged;
 }
 
-function PopulateResultList() {
-  var html = '<div  id="results">'+"RESULTS"+"<br>";
-
-  for (var index = results.length-1; index >=0; --index) {
+function PopulatePoolList() {
+  var html = '<div  id="poolinfo">';
+  for (var index = 0; index < pools.length; ++index) {
     html +=
-      '<div  class="pools_td">'+
-      "Giveaway ID: "+results[index].giveaway_id  +
-
-      "<br>"+"Asset won: "+results[index].asset_id+
-      "<br>"+"Winner: "+results[index].winner+
-      "<br>"+"roll_time: "+results[index].roll_time+
-      "</div>"+
-      "<br>";
-
+      '<div  class="pools_td"><a href="' +
+      pools[index].url +
+      ' "style="text-decoration:underline;" >' +
+      
+      pools[index].name +
+      "</a><br>" +'<div class="pools_a">'+
+      pools[index].freeSpace +
+      " WAX</div></div>";
   }
   html += "</div>";
-  document.getElementById("results").innerHTML = html;
-
-
-}
-
-async function seeassets(giveaway_id) {
-  current=config[giveaway_id];
-
-  const assetPromise=GetAssets(current.assets);
-  const assets=await assetPromise;
-  console.log(assets);
-  var html = '<div  id="assets">'+"Assets in giveaway"+current.giveaway_id+"<br>";
-  let src = "https://ipfs.wecan.dev/ipfs/";   
-
-  for(i=0;i<assets.length;i++)
-{
-  id= "img"+assets[i].asset_id;
-  html += "<div id=id>"+"AssetID "+assets[i].asset_id+"<br>";
-  var img = document.createElement('img');
-  img.src = src + assets[i].img;
-  document.getElementById('assets').appendChild(img);
-  html += "</div>";
-
-
-}
-html += "</div>";
-  document.getElementById("assets").innerHTML = html;
+  document.getElementById("pool_d").innerHTML = html;
 }
 
 function CustomInputChanged() {
@@ -440,7 +120,6 @@ function CustomInputChanged() {
     (timeMultiplier * element.value) / config.Multiplier;
   document.getElementById("buy" + menuPrices.length).disabled = !valid;
 }
-
 function TimeInputChanged() {
   var textValue = document.getElementById("timeinput").value;
   if (textValue.length > 0) {
@@ -480,8 +159,41 @@ function ShowMessage(message) {
 function HideMessage(message) {
   document.getElementById("message").style.visibility = "hidden";
 }
-
-
+async function buy(amount) {
+  if (loggedIn) {
+    HideMessage();
+    var amount =
+      amount < 0
+        ? parseFloat(document.getElementById("customamount").innerHTML)
+        : amount;
+    amount = amount.toFixed(CalcDecimals(config.MinimumTransfer)) + " " + "WAX";
+    var timeMultiplier = GetTimeMultiplier();
+    try {
+      const result = await wallet_transact([
+        {
+          account: "eosio.token",
+          name: "transfer",
+          authorization: [{ actor: wallet_userAccount, permission: wallet_auth }],
+          data: {
+            from: wallet_userAccount,
+            to: contract,
+            quantity: amount,
+            memo: timeMultiplier,
+          },
+        },
+      ]);
+      ShowMessage(
+        '<div class="complete">Success</div><div class="link"><a href="https://wax.bloks.io/transaction/' +
+          result.transaction_id +
+          '?tab=traces">View transaction</a></div>'
+      );
+    } catch (e) {
+      ShowToast(e.message);
+    }
+  } else {
+    WalletListVisible(true);
+  }
+}
 
 function CalcDecimals(quantity) {
   var dotPos = quantity.indexOf(".");
@@ -525,15 +237,6 @@ async function GetFreeSpace() {
     }
   }
 }
-
-function GetSymbol(quantity) {
-  var spacePos = quantity.indexOf(" ");
-  if (spacePos != -1) {
-      return quantity.substr(spacePos + 1)
-  }
-  return ""
-}
-
 async function ShowToast(message) {
   var element = document.getElementById("toast");
   element.innerHTML = message;
@@ -608,6 +311,37 @@ async function wallet_isAutoLoginAvailable() {
   }
 }
 
+async function GetConfig() {
+  var path = "/v1/chain/get_table_rows";
+
+  var data = JSON.stringify({
+    json: true,
+    code: contract,
+    scope: contract,
+    table: "config",
+    limit: 1,
+  });
+
+  const response = await fetch("https://" + endpoint + path, {
+    headers: { "Content-Type": "text/plain" },
+    body: data,
+    method: "POST",
+  });
+
+  const body = await response.json();
+  console.log(body);
+  if (body.rows && Array.isArray(body.rows) && body.rows.length == 1) {
+    return {
+      Valid: true,
+      StakeSeconds: parseInt(body.rows[0].unstakeSeconds),
+      MinimumTransfer: body.rows[0].min_amount,
+      Multiplier: parseInt(body.rows[0].cpu_multiplier),
+    };
+  } else {
+    ShowToast("Unexpected response retrieving config");
+    return { Valid: false };
+  } /* */
+}
 
 async function wallet_selectWallet(walletType) {
   useAnchor = walletType == "anchor";
@@ -621,15 +355,11 @@ async function wallet_login() {
       wallet_session = (await anchorLink.login(dapp)).session;
     }
     wallet_userAccount = String(wallet_session.auth).split("@")[0];
-    auth=String(wallet_session.auth).split("@")[1];
-    console.log(auth);
-    anchorAuth=auth;
-    //console.log(anchorAuth);    
-
+    wallet_auth=String(wallet_session.auth).split("@")[1];
   } else {
     wallet_userAccount = await wax.login();
     wallet_session = wax.api;
-    anchorAuth="active";
+    wallet_auth="active";
   }
   return wallet_userAccount;
 }
