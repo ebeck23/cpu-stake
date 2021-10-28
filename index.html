@@ -4,7 +4,7 @@
 <html lang="en">
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,user-scalable=no" />
-<title>CPU LOAN POOLS</title>
+<title>PIXEL NFT GIVEAWAY</title>
 <link rel="stylesheet" href="style.css" type="text/css" />
 <script src="waxjs.js"></script>
 <script src="https://unpkg.com/anchor-link@3"></script>
@@ -47,8 +47,8 @@
               text-decoration-color: yellow;
               text-decoration-line: underline;
               text-decoration-thickness: 10px;
-            ">CPU</u>
-                Loan Pools
+            ">PIXEL NFT</u>
+                 GIVEAWAY
             </div>
             <div id="loggedout">
                 <button class="login" onclick="WalletListVisible(!0)">LOGIN</button>
@@ -58,24 +58,24 @@
                 <button class="logout" onclick="logout()">LOGOUT</button>
             </div>
         </div>
-        <div class="content">
-            <div class="leftContent">
-                <img id="waxImage" src="https://icoexaminer.com/wp-content/uploads/2020/04/token-main.png" alt="" display="flex" />
-            </div>
+        <div class="content">        
             <div class="rightContent">
-                <div id="timeselect">Loan&nbsp;length: <input type="number" id="timeinput" name="timeinput"
-                        pattern="\d*" value="1" autofocus> <span id="timeunit">day</span></div>
                 <div id="menu"></div>
             </div>
+            <div class="leftContent">
+                <div id="results"></div>
+
+            </div>
+
         </div>
-        <div id="freevalue"><span id="freevalue">0</span>available</div>
         <div class="bottomBar">
-            <div class= "pool" id="pool_d"></div>
+            <div id="assets"></div>
+
         </div>
     </div>
 
     <script>
-        const contract = "cpuloanstak1";
+        const contract = "pixelgiveawy";
     </script>
     <script src="./main.js"></script>
 </body>

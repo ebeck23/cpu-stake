@@ -93,6 +93,11 @@ box-sizing: border-box;
 text-align:center;
 top:50%;
 }
+.nftimg {
+  width: 250px;
+  height: auto;
+  padding: 10px;
+}
 
 .bottomBar {
   margin-top: 2%;
